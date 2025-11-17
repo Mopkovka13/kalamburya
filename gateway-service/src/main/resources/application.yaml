@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: gateway-service
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: test-service
+              uri: http://test:8081
+              predicates:
+                - Path=/api/v*/test/**
+              filters:
+                - StripPrefix=0
