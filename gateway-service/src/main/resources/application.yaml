@@ -7,9 +7,19 @@ spring:
       server:
         webflux:
           routes:
-            - id: test-service
-              uri: http://test:8081
+            - id: orchestrator-sign-up
+              uri: http://localhost:8989
               predicates:
-                - Path=/api/v*/test/**
+                - Path=
+                        # Sign-Up
+                        /api/v*/auth/sign-up,
+                        /api/v*/auth/oauth2/**
               filters:
                 - StripPrefix=0
+
+            - id: auth-service
+              uri: http://localhost:8082
+              predicates:
+                  - Path=/api/v*/auth/**
+              filters:
+                  - StripPrefix=0
